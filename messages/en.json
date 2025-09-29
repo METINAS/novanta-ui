@@ -1,5 +1,43 @@
 {
-  "Test": {
-    "test": "test en"
+  "Navbar": {
+    "Link": {
+      "intro": "Intro",
+      "developer": "Developer",
+      "project": "Project",
+      "locality": "Locality",
+      "contact": "Contact"
+    },
+    "Button": {
+      "chooseFlat": "Choose your apartment"
+    },
+    "Aria": {
+      "navOpen": "Open menu",
+      "navClose": "Close menu"
+    }
+  },
+  "KPI": {
+    "Value": {
+      "kpiValue1": "15",
+      "kpiValue2": "4",
+      "kpiValue3": "2",
+      "kpiValue4": "1",
+      "kpiValue5": "30"
+    },
+    "Desc": {
+      "kpiDesc1": "two-room apartments",
+      "kpiDesc2": "three-room apartments",
+      "kpiDesc3": "four-room apartments",
+      "kpiDesc4": "generous penthouse",
+      "kpiDesc5": "parking spaces"
+    }
+  },
+  "ProjectDescPoint": {
+    "projectPo1": "Closed and fenced area",
+    "projectPo2": "Connection of living with nature",
+    "projectPo3": "Gardens for ground-floor apartments",
+    "projectPo4": "At least one terrace for each apartment",
+    "projectPo5": "Playground at the entrance to the area",
+    "projectPo6": "Lockable bicycle storage",
+    "projectPo7": "Charging station for e-bikes"
   }
 }

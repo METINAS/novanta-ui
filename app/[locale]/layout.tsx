@@ -4,6 +4,8 @@ import {NextIntlClientProvider} from "next-intl";
 import {Locale, routing} from "@/i18n/routing";
 import {notFound} from "next/navigation";
 import {getMessages} from "next-intl/server";
+import Footer from "@/app/[locale]/component/layout/Footer";
+import Navbar from "@/app/[locale]/component/layout/Navbar";
 
 type Params = Promise<{ locale: string }>;
 
@@ -26,10 +28,12 @@ export default async function RootLayout({ children, params }: { children: React
     const messages = await getMessages();
 
     return (
-        <html lang="en">
-            <body className="w-full bg-[#262626]">
+        <html lang={locale}>
+            <body className={`w-full`}>
                 <NextIntlClientProvider messages={messages}>
+                    <Navbar />
                     {children}
+                    <Footer />
                 </NextIntlClientProvider>
             </body>
         </html>

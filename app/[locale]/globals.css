@@ -1,2 +1,89 @@
-@import "../../node_modules/tailwindcss/dist/lib.d.mts";
+@import "tailwindcss";
 
+@theme {
+    /* Base */
+    --color-brand: #f34508;
+    --color-emerald: #0a704e;
+
+    /* Brand states */
+    --color-brand-hover: #ff5c26;     /* lighter */
+    --color-brand-pressed: #c73406;   /* darker */
+    --color-brand-disabled: #f3450880; /* semi-transparent */
+
+    /* Emerald states */
+    --color-emerald-hover: #12976c;    /* lighter */
+    --color-emerald-pressed: #064d35;  /* darker */
+    --color-emerald-disabled: #0a704e80; /* semi-transparent */
+
+    /* Bg color */
+    --color-background-gray: "#f1f1f1"; /* color for gray bgs */
+}
+
+html, body {
+    font-weight: 400;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+}
+
+.m-container {
+    width: 100%;
+    margin-inline: auto;
+    padding-inline: 20px;
+}
+
+.m-container--regular {
+    max-width: 1440px;
+}
+
+.m-container--full {
+    max-width: none;
+    padding-inline: 0;
+}
+
+h1, .h1 {
+    font-weight: 700;
+    line-height: 1.3;
+    font-size: clamp(2.25rem, 2.5vw + 1rem, 3.875rem); /* 36px → 62px */
+}
+
+h2, .h2 {
+    font-weight: 700;
+    line-height: 1.3;
+    font-size: clamp(2.125rem, 2.2vw + 0.9rem, 3.375rem); /* 34px → 54px */
+}
+
+h3, .h3 {
+    font-weight: 700;
+    line-height: 1.2;
+    font-size: clamp(1.75rem, 1.8vw + 0.8rem, 2.875rem); /* 28px → 46px */
+}
+
+h4, .h4 {
+    font-weight: 700;
+    line-height: 1.3;
+    font-size: clamp(1.625rem, 1.6vw + 0.7rem, 2.625rem); /* 26px → 42px */
+}
+
+h5, .h5 {
+    font-weight: 700;
+    line-height: 1.1;
+    font-size: 2rem; /* 32px */
+}
+
+h6, .h6 {
+    font-weight: 700;
+    line-height: 1.0;
+    font-size: 1.5rem; /* 24px */
+}
+
+.pp-30 { font-size: 1.875rem; line-height: 1.4; font-weight: 400; }
+
+.pp-22 { font-size: 1.375rem; line-height: 1.6; font-weight: 400; }
+
+.pp-20 { font-size: 1.25rem;  line-height: 1.5; font-weight: 400; }
+
+.pp-18 { font-size: 1.125rem; line-height: 1.6; font-weight: 400; }
+
+p, .pp-16 { font-size: 1rem; line-height: 1.5; font-weight: 400; }
+
+.pp-16-tight { font-size: 1rem; line-height: 1.2; font-weight: 600; }
