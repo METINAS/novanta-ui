@@ -39,5 +39,28 @@
     "projectPo5": "Playground at the entrance to the area",
     "projectPo6": "Lockable bicycle storage",
     "projectPo7": "Charging station for e-bikes"
+  },
+  "Intro": {
+    "sectionTitle": "INTRO",
+    "title-1": "Branded Living",
+    "title-2": "with a 10-Year Warranty",
+    "description": "After Petržalka and Ružinov, we are bringing Novanta branded living to Prievoz as well. It was created by our experienced development company, which has completed several successful and award-winning projects in Bratislava.",
+    "cta": "Read more"
+  },
+  "Locality": {
+    "sectionTitle": "LOCALITY",
+    "title-1": "Symbiosis",
+    "title-2": "of Nature and Comfort",
+    "description": "Novanta will be located on Strojnícka Street, in the green part of Prievoz.\nIt represents an exceptional symbiosis of nature, urban comfort,\nprivacy in a gated area, excellent transport connections to the bypass\nand integrated transport, with complete civic amenities within walking distance.",
+    "cta": "More about the locality"
+  },
+  "References": {
+    "sectionTitle": "DEVELOPER",
+    "title-1": "From the Developer",
+    "title-2": "of Successful Projects",
+    "description1": "Novanta has been operating in the real estate market since 2013, but our experience in construction goes back much further. We are a stable trio of experienced developers complemented by a team of qualified professionals.",
+    "description2": "We have completed several successful residential projects and received awards for architecture and a transparent approach. We focus on comprehensive development from the identification",
+    "description3": "of an investment opportunity, through project preparation, to construction and bringing properties to the market. We don’t just build new buildings, we shape a modern urban environment that will serve future generations as well. Timeless design, innovative technological solutions, and sustainable ecological processes with minimal environmental impact bring an increase in property value. We strive to improve the quality of living and the community already present in the locality.",
+    "cta": "References"
   }
 }
