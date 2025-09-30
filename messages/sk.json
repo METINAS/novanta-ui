@@ -59,8 +59,20 @@
     "title-1": "Od developera",
     "title-2": "úspešných projektov",
     "description1": "Spoločnosť Novanta podniká na realitnom trhu od roku 2013, naše pôsobenie v oblasti výstavby je však oveľa dlhšie. Sme stabilná trojica skúsených developerov doplnená o tím kvalifikovaných profesionálov.",
-    "description2": "Máme za sebou realizáciu viacerých úspešných rezidenčných projektov i ocenení za architektúru a transparentný prístup. Sústredíme sa na komplexný development od identifikácie",
-    "description3": "investičnej príležitosti, cez projektovú prípravu až po realizáciu a uvedenie nehnuteľností na trh. Nestaviame len nové budovy, ale formujeme moderné mestské prostredie, ktoré bude slúžiť aj ďalším generáciám. Nadčasový dizajn, inovatívne technologické riešenia a udržateľné ekologické procesy s minimálnym enviromentálnym dopadom prinášajú rast hodnoty nehnuteľnosti. Snažíme sa, aby zlepšili kvalitu bývania i komunite, ktorá už v danej lokalite žije.",
+    "description2": "Máme za sebou realizáciu viacerých úspešných rezidenčných projektov i ocenení za architektúru a transparentný prístup. Sústredíme sa na komplexný development od identifikácie investičnej príležitosti, cez projektovú prípravu až po realizáciu a uvedenie nehnuteľností na trh. Nestaviame len nové budovy, ale formujeme moderné mestské prostredie, ktoré bude slúžiť aj ďalším generáciám.",
+    "description3": "Nadčasový dizajn, inovatívne technologické riešenia a udržateľné ekologické procesy s minimálnym enviromentálnym dopadom prinášajú rast hodnoty nehnuteľnosti. Snažíme sa, aby zlepšili kvalitu bývania i komunite, ktorá už v danej lokalite žije.",
     "cta": "Referencie"
+  },
+  "Contact": {
+    "sectionTitle": "KONTAKT",
+    "title-1": "Zaujal vás",
+    "title-2": "tento projekt?",
+    "description": "Kontaktujte nás, prosím.",
+    "button": {
+      "callCta": "Zavolajte na",
+      "callNum": "+421 944 48 48 49",
+      "emailCta": "Napíšte na",
+      "writeMail": "predaj@novanta.sk"
+    }
   }
 }

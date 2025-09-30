@@ -4,6 +4,7 @@ import Project from "@/app/[locale]/component/ui/section/Project";
 import References from "@/app/[locale]/component/ui/section/References";
 import Location from "@/app/[locale]/component/ui/section/Location";
 import ImageGallery from "@/app/[locale]/component/ui/block/ImageGallery";
+import Contact from "@/app/[locale]/component/ui/section/Contact";
 
 const gallery1Images = [
     "/image/client/landing/gallery_1.png",
@@ -31,6 +32,7 @@ export default function Home() {
                 <div className="hidden md:block">
                     <ImageGallery images={gallery2Images} />
                 </div>
+                <Contact />
             </div>
         </>
     );

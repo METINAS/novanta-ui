@@ -59,8 +59,20 @@
     "title-1": "From the Developer",
     "title-2": "of Successful Projects",
     "description1": "Novanta has been operating in the real estate market since 2013, but our experience in construction goes back much further. We are a stable trio of experienced developers complemented by a team of qualified professionals.",
-    "description2": "We have completed several successful residential projects and received awards for architecture and a transparent approach. We focus on comprehensive development from the identification",
-    "description3": "of an investment opportunity, through project preparation, to construction and bringing properties to the market. We don’t just build new buildings, we shape a modern urban environment that will serve future generations as well. Timeless design, innovative technological solutions, and sustainable ecological processes with minimal environmental impact bring an increase in property value. We strive to improve the quality of living and the community already present in the locality.",
+    "description2": "We have completed several successful residential projects and received awards for architecture and a transparent approach. We focus on comprehensive development from the identification of an investment opportunity, through project preparation, to construction and bringing properties to the market. We don’t just build new buildings, we shape a modern urban environment that will serve future generations as well.",
+    "description3": "Timeless design, innovative technological solutions, and sustainable ecological processes with minimal environmental impact bring an increase in property value. We strive to improve the quality of living and the community already present in the locality.",
     "cta": "References"
+  },
+  "Contact": {
+    "sectionTitle": "CONTACT",
+    "title-1": "Are you interested",
+    "title-2": "in this project?",
+    "description": "Please contact us.",
+    "button": {
+      "callCta": "Call",
+      "callNum": "+421 944 48 48 49",
+      "emailCta": "Write to",
+      "writeMail": "predaj@novanta.sk"
+    }
   }
 }
