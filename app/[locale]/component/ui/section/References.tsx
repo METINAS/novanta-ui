@@ -32,7 +32,7 @@ const References = () => {
         <MContainer
             variant="full"
             backgroundImage="/image/client/landing/developer_bg.png"
-            className="py-8 md:py-16"
+            className="py-8 md:py-16 border-b-8 border-brand"
         >
             <MContainer variant="regular">
                 <div className="flex flex-col gap-8 text-white">

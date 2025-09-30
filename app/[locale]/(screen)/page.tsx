@@ -5,6 +5,7 @@ import References from "@/app/[locale]/component/ui/section/References";
 import Location from "@/app/[locale]/component/ui/section/Location";
 import ImageGallery from "@/app/[locale]/component/ui/block/ImageGallery";
 import Contact from "@/app/[locale]/component/ui/section/Contact";
+import ChooseFlat from "@/app/[locale]/component/ui/section/ChooseFlat";
 
 const gallery1Images = [
     "/image/client/landing/gallery_1.png",
@@ -29,6 +30,7 @@ export default function Home() {
                 <Project />
                 <ImageGallery images={gallery1Images} />
                 <Location />
+                <ChooseFlat />
                 <div className="hidden md:block">
                     <ImageGallery images={gallery2Images} />
                 </div>

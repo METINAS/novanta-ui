@@ -52,12 +52,7 @@ const Project = async () => {
                     </div>
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="w-full md:w-3/4">
-                            <Image
-                                src=""
-                                alt=""
-                                width={128}
-                                height={128}
-                            />
+
                         </div>
                         <div className="w-full md:w-1/4 flex flex-col gap-2">
                             {}

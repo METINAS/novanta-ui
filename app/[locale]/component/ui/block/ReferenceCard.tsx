@@ -29,7 +29,7 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ image, heading, points })
                         {heading}
                     </p>
                     {points.length > 0 && points.map((point) => (
-                        <p className="pp-16 text-black">{point.pointText}</p>
+                        <p key={point.pointText} className="pp-16 text-black">{point.pointText}</p>
                     ))}
                 </div>
             </div>
