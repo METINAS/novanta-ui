@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 type Texture = "solid" | "soft" | "outline" | "ghost";
 type Variant = "brand" | "emerald"; // brand = primary, emerald = secondary
-type Size = "sm" | "md" | "lg";
+type Size = "sm" | "md" | "lg" | "xl";
 
 export type MButtonProps = Omit<AriaButtonProps, "className" | "children"> & {
     children?: React.ReactNode;
@@ -17,10 +17,11 @@ export type MButtonProps = Omit<AriaButtonProps, "className" | "children"> & {
     rightIcon?: React.ReactNode;
     loading?: boolean;
     className?: string;
+    xlLabel?: string;
 };
 
 const base =
-    "inline-flex items-center justify-center gap-2 font-medium transition " +
+    "inline-flex items-center justify-center gap-4 font-medium transition " +
     "cursor-pointer disabled:cursor-not-allowed disabled:opacity-50 " +
     "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 " +
     "ring-offset-white dark:ring-offset-black";
@@ -29,6 +30,7 @@ const sizeClasses: Record<Size, string> = {
     sm: "text-sm h-9 px-3",
     md: "text-base h-11 px-4",
     lg: "text-base h-12 px-5",
+    xl: "text-lg h-20 px-4",
 };
 
 function textureClasses(texture: Texture, variant: Variant) {
@@ -90,6 +92,7 @@ export function MButton({
                             loading = false,
                             className,
                             isDisabled,
+                            xlLabel,
                             ...ariaProps
                         }: MButtonProps) {
     const disabled = isDisabled || loading;
@@ -101,7 +104,7 @@ export function MButton({
             className={clsx(base, sizeClasses[size], textureClasses(texture, variant), className)}
         >
             {leftIcon && (
-                <span aria-hidden className={clsx("inline-flex", size !== "lg" ? "text-[1.05em]" : "text-[1.1em]")}>
+                <span aria-hidden className={clsx("inline-flex", size !== "xl" ? "text-[1.05em]" : "text-[2em]")}>
                     {leftIcon}
                 </span>
             )}
@@ -113,11 +116,20 @@ export function MButton({
                         className="mr-2 inline-block size-4 animate-spin rounded-full border-2 border-current border-t-transparent"
                     />
                 )}
-                {children}
+                {xlLabel ? (
+                    <div className="flex flex-col gap-1 items-start">
+                        <p className="text-xs">{xlLabel}</p>
+                        {children}
+                    </div>
+                ) : (
+                    <>
+                        {children}
+                    </>
+                )}
             </span>
 
             {rightIcon && (
-                <span aria-hidden className={clsx("inline-flex", size !== "lg" ? "text-[1.05em]" : "text-[1.1em]")}>
+                <span aria-hidden className={clsx("inline-flex", size !== "xl" ? "text-[1.05em]" : "text-[1.4em]")}>
                     {rightIcon}
                 </span>
             )}

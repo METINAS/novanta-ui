@@ -74,5 +74,20 @@
       "emailCta": "Napíšte na",
       "writeMail": "predaj@novanta.sk"
     }
+  },
+  "Footer": {
+    "email": "predaj@novanta.sk",
+    "phone": "0944 48 48 49",
+    "terms&conditions": "Ochrana osobných údajov",
+    "rightsReserved": "© Novanta, 2025. Všetky práva vyhradené",
+    "mapLabel": "Mapa stránky",
+    "Link": {
+      "intro": "Úvod",
+      "developer": "Developer",
+      "project": "Projekt",
+      "locality": "Lokalita",
+      "contact": "Kontakt",
+      "chooseFlat": "Vyberte si svoj byt"
+    }
   }
 }

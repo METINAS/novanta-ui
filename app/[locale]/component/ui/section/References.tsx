@@ -47,23 +47,22 @@ const References = () => {
                         <div className="pp-18">{t("description1")}</div>
                         <div className="pp-18">{t("description3")}</div>
                         <div className="pp-18">{t("description2")}</div>
-                    </div>
-
-                    <div className="flex w-full justify-center">
-                        <Button
-                            variant="brand"
-                            size="lg"
-                            onClick={() => setOpen(v => !v)}
-                            className="transition-all duration-300 flex items-center gap-4"
-                        >
-                            {t("cta")}
-                            <GoArrowDown
-                                className={clsx(
-                                    "transform transition-transform duration-300",
-                                    open ? "rotate-180" : "rotate-0"
-                                )}
-                            />
-                        </Button>
+                        <div className="block">
+                            <Button
+                                variant="brand"
+                                size="lg"
+                                onClick={() => setOpen(v => !v)}
+                                className="transition-all duration-300 flex items-center gap-4"
+                            >
+                                {t("cta")}
+                                <GoArrowDown
+                                    className={clsx(
+                                        "transform transition-transform duration-300",
+                                        open ? "rotate-180" : "rotate-0"
+                                    )}
+                                />
+                            </Button>
+                        </div>
                     </div>
 
                     <div

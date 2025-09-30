@@ -24,7 +24,7 @@ const ReferenceCard: React.FC<ReferenceCardProps> = ({ image, heading, points })
                     sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 100vw"
                     draggable={false}
                 />
-                <div className="flex flex-col p-4 gap-4 bg-white min-h-[580px] lg:min-h-[480px]">
+                <div className="flex flex-col p-4 gap-4 bg-white min-h-[580px] lg:min-h-[510px]">
                     <p className="pp-18 uppercase text-brand font-bold">
                         {heading}
                     </p>
