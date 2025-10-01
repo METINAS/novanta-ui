@@ -49,6 +49,14 @@ html, body {
     padding-inline: 0;
 }
 
+@media (min-width: 1441px) {
+    .bleed-left-to-viewport {
+        --outdent: calc((100vw - 1440px) / 2 + 20px);
+        margin-left: calc(var(--outdent) * -1);
+        width: calc(100% + var(--outdent));
+    }
+}
+
 h1, .h1 {
     font-weight: 700;
     line-height: 1.3;

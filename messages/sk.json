@@ -15,30 +15,36 @@
       "navClose": "Zavrieť menu"
     }
   },
-  "KPI": {
-    "Value": {
-      "kpiValue1": "15",
-      "kpiValue2": "4",
-      "kpiValue3": "2",
-      "kpiValue4": "1",
-      "kpiValue5": "30"
+  "Project": {
+    "sectionTitle": "PROJEKT",
+    "title-1": "Jedinečné byty",
+    "title-2": "s komfortom rodinného domu",
+    "cta": "Zistiť viac",
+    "ProjectDescPoint": {
+      "projectPo1": "Uzavretý a oplotený areál",
+      "projectPo2": "Prepojenie bývania s prírodou",
+      "projectPo3": "Záhradky k bytom na prízemí",
+      "projectPo4": "Minimálne jedna terasa ku každému bytu",
+      "projectPo5": "Detské ihrisko pri vstupe do areálu",
+      "projectPo6": "Uzamykateľný priestor na bicykle",
+      "projectPo7": "Nabíjacia stanica pre elektrobicykle"
     },
-    "Desc": {
-      "kpiDesc1": "dvojizbových bytov",
-      "kpiDesc2": "trojizbové byty",
-      "kpiDesc3": "štvortizbové",
-      "kpiDesc4": "veľkorysý penthouse",
-      "kpiDesc5": "perkovacích miest"
+    "KPI": {
+      "Value": {
+        "kpiValue1": "15",
+        "kpiValue2": "4",
+        "kpiValue3": "2",
+        "kpiValue4": "1",
+        "kpiValue5": "30"
+      },
+      "Desc": {
+        "kpiDesc1": "dvojizbových bytov",
+        "kpiDesc2": "trojizbové byty",
+        "kpiDesc3": "štvortizbové",
+        "kpiDesc4": "veľkorysý penthouse",
+        "kpiDesc5": "perkovacích miest"
+      }
     }
-  },
-  "ProjectDescPoint": {
-    "projectPo1": "Uzavretý a oplotený areál",
-    "projectPo2": "Prepojenie bývania s prírodou",
-    "projectPo3": "Záhradky k bytom na prízemí",
-    "projectPo4": "Minimálne jedna terasa ku každému bytu",
-    "projectPo5": "Detské ihrisko pri vstupe do areálu",
-    "projectPo6": "Uzamykateľný priestor na bicykle",
-    "projectPo7": "Nabíjacia stanica pre elektrobicykle"
   },
   "Intro": {
     "sectionTitle": "ÚVOD",
