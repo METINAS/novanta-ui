@@ -45,20 +45,11 @@ const Project = async () => {
                         </div>
                     </div>
                 </div>
-                <div className="bg-background-gray flex flex-col gap-8 text-black p-4 md:p-8">
-                    <p className="pp-20">PROJEKT</p>
-                    <div className="flex w-full">
-                        <h2>JEDINECNE BYTY <br/> s komfortom rodinneho domu</h2>
-                    </div>
-                    <div className="flex flex-col md:flex-row gap-4">
-                        <div className="w-full md:w-3/4">
 
-                        </div>
-                        <div className="w-full md:w-1/4 flex flex-col gap-2">
-                            {}
-                        </div>
-                    </div>
+                <div className="bg-gray-500 w-full">
+
                 </div>
+
             </MContainer>
         </>
     )

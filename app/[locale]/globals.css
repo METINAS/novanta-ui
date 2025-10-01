@@ -35,6 +35,11 @@ html, body {
     padding-inline: 20px;
 }
 
+.m-container-custom-pX {
+    width: 100%;
+    margin-inline: auto;
+}
+
 .m-container--regular {
     max-width: 1440px;
 }

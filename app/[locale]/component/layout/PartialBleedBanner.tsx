@@ -16,10 +16,10 @@ const PartialBleedBanner: React.FC<PartialBleedBannerProps> = ({
                                                                }) => {
     return (
         <section className={`relative w-full ${className || ""}`}>
+
             <div
-                className="absolute inset-y-0 left-0"
+                className="hidden md:block absolute inset-0"
                 style={{
-                    width: "calc(50vw + min(100vw, 1440px)/2 - 20px)",
                     backgroundImage: `url(${image})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center"
@@ -27,17 +27,15 @@ const PartialBleedBanner: React.FC<PartialBleedBannerProps> = ({
                 aria-hidden="true"
             />
 
-            <div
-                className={`absolute inset-y-0 left-0 ${overlayClassName}`}
-                style={{
-                    width: "calc(50vw + min(100vw, 1440px)/2 - 20px)"
-                }}
-                aria-hidden="true"
-            />
+            {overlayClassName && (
+                <div className={`hidden md:block absolute inset-0 ${overlayClassName}`} aria-hidden="true" />
+            )}
 
             <div className="relative z-10">
-                <MContainer variant="regular">
-                    {children}
+                <MContainer variant="regular" paddings={{ left: 20, right: 0 }}>
+                    <div className="relative px-5 md:px-0 md:min-h-[560px]">
+                        {children}
+                    </div>
                 </MContainer>
             </div>
         </section>
