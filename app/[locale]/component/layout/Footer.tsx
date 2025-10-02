@@ -1,7 +1,11 @@
+'use client';
+
+import dynamic from 'next/dynamic';
 import MContainer from "@/app/[locale]/component/layout/MContainer";
 import Image from "next/image";
-import {getTranslations} from "next-intl/server";
-import Map from "../../../[locale]/component/ui/block/Map";
+import { syne } from "@/app/[locale]/fonts";
+import MLink from "@/app/[locale]/component/micro/MLink";
+import { useTranslations } from "next-intl";
 
 type FooterNavItem = {
     label: string;
@@ -15,10 +19,12 @@ const footerNavigationItems: FooterNavItem[] = [
     { label: "locality", href: "" },
     { label: "contact", href: "" },
     { label: "chooseFlat", href: "" },
-]
+];
 
-const Footer = async () => {
-    const t = await getTranslations("Footer");
+const Map = dynamic(() => import("../../../[locale]/component/ui/block/Map"), { ssr: false });
+
+const Footer = () => {
+    const t = useTranslations("Footer");
 
     return (
         <MContainer variant="full">
@@ -32,7 +38,7 @@ const Footer = async () => {
                             height={84}
                         />
                     </div>
-                    <div className="block pp-16 text-black">
+                    <div className={`${syne.className} font-bold block pp-16 text-black`}>
                         <p>{t("email")}</p>
                         <p>{t("phone")}</p>
                     </div>
@@ -42,10 +48,12 @@ const Footer = async () => {
                     </div>
                 </div>
                 <div className="flex flex-col justify-between">
-                    <p className="text-brand pp-20 font-bold">{t("mapLabel")}</p>
+                    <p className={`${syne.className} text-brand pp-20 font-bold`}>{t("mapLabel")}</p>
                     <div className="flex flex-col gap-2">
-                        {footerNavigationItems.length > 0 && footerNavigationItems.map((navItem) => (
-                            <a key={navItem.label} className="text-black pp-16">{t(`Link.${navItem.label}`)}</a>
+                        {footerNavigationItems && footerNavigationItems.map((item) => (
+                            <MLink key={item.label} route={item.href} type="footer" className="!p-0">
+                                {t(`Link.${item.label}`)}
+                            </MLink>
                         ))}
                     </div>
                 </div>
@@ -54,7 +62,7 @@ const Footer = async () => {
                 </div>
             </MContainer>
         </MContainer>
-    )
+    );
 }
 
 export default Footer;

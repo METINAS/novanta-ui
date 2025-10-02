@@ -1,14 +1,15 @@
-"use client";
+'use client';
 
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import MLink from "@/app/[locale]/component/micro/MLink";
-import {usePathname} from "next/navigation";
+import { usePathname } from "next/navigation";
 import Button from "@/app/[locale]/component/micro/Button";
-import {GoArrowRight} from "react-icons/go";
-import {useTranslations} from "next-intl";
-import {isPhone} from "@/app/[locale]/util/isPhone";
+import { GoArrowRight } from "react-icons/go";
+import { useTranslations } from "next-intl";
+import { isPhone } from "@/app/[locale]/util/isPhone";
 import MContainer from "@/app/[locale]/component/layout/MContainer";
+import LanguageSwitcher from "@/app/[locale]/component/ui/block/LanguageSwitcher";
 
 type NavLink = {
     text: string;
@@ -16,29 +17,30 @@ type NavLink = {
 };
 
 const navLinks: NavLink[] = [
-    {text: "intro", href: "/"},
-    {text: "developer", href: "/"},
-    {text: "project", href: "/"},
-    {text: "locality", href: "/"},
-    {text: "contact", href: "/"},
+    { text: "intro", href: "/" },
+    { text: "developer", href: "/" },
+    { text: "project", href: "/" },
+    { text: "locality", href: "/" },
+    { text: "contact", href: "/" },
 ];
 
 const Navbar = () => {
     const t = useTranslations("Navbar");
-
-    const phone = isPhone();
-    const NAV_HEIGHT = phone ? 72 : 104 ;
-
+    const [NAV_HEIGHT, setNavHeight] = useState<number>(104);
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState<boolean>(false);
     const pathname = usePathname();
+
+    useEffect(() => {
+        setNavHeight(isPhone() ? 72 : 104);
+    }, []);
 
     useEffect(() => {
         const onScroll = () => setScrolled(window.scrollY > 8);
         onScroll();
         window.addEventListener("scroll", onScroll, { passive: true });
         return () => window.removeEventListener("scroll", onScroll);
-    }, [])
+    }, []);
 
     useEffect(() => {
         document.body.classList.toggle("overflow-hidden", open);
@@ -52,8 +54,8 @@ const Navbar = () => {
     return (
         <>
             <nav
-                className={`fixed inset-x-0 top-0 z-50 transition-colors ${
-                    scrolled || open ? "bg-black/90 backdrop-blur" : "bg-black/70"
+                className={`fixed inset-x-0 top-0 z-50 backdrop-blur-lg transition-colors py-2 ${
+                    scrolled || open ? "bg-black/90" : "bg-black/70"
                 }`}
             >
                 <MContainer variant="regular" className="relative">
@@ -61,17 +63,22 @@ const Navbar = () => {
                         className="flex items-center justify-between"
                         style={{ height: NAV_HEIGHT }}
                     >
-                        <Image
-                            src="/image/layout/novanta_logo.webp"
-                            alt="Logo Novanta"
-                            height={84}
-                            width={196}
-                            priority
-                        />
+                        <div className="flex gap-2 items-center">
+                            <Image
+                                src="/image/layout/novanta_logo.webp"
+                                alt="Logo Novanta"
+                                height={512}
+                                width={512}
+                                priority
+                                className="h-[32px] lg:h-[48px] w-auto"
+                            />
+                            <LanguageSwitcher />
+                        </div>
 
                         <div className="hidden md:flex gap-6 items-center">
                             {navLinks.map((link) => (
                                 <MLink
+                                    type="nav"
                                     key={link.text}
                                     route={link.href}
                                     ariaLabel={t(`Link.${link.text}`)}
@@ -137,6 +144,7 @@ const Navbar = () => {
                                 <nav className="flex flex-col gap-1">
                                     {navLinks.map((link) => (
                                         <MLink
+                                            type="nav"
                                             key={link.text}
                                             route={link.href}
                                             ariaLabel=""
@@ -157,7 +165,6 @@ const Navbar = () => {
                                         rightIcon={<GoArrowRight />}
                                     >
                                         {t("Button.chooseFlat")}
-                                        button
                                     </Button>
                                 </div>
                             </div>

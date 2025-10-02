@@ -12,7 +12,6 @@ type Params = Promise<{ locale: string }>;
 
 export async function generateMetadata({ params }: { params: Params }) {
     const { locale } = await params;
-    console.log(locale);
     return {
         title: "Novanta development",
         description: "what is happening",

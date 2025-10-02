@@ -105,5 +105,12 @@
       "reserveFlat": "Rezervovať byt",
       "developer": "O developerovi"
     }
+  },
+  "ChooseFlat": {
+    "sectionHeading": "Vyberte si svoj byt",
+    "title-1": "Bývanie",
+    "title-2": "po akom ste túžili",
+    "description": "Hľadáte bývanie v dostupnej lokalite, bezpečný domov v súkromí uzavretého areálu, so záhradou či terasou na posedenie s priateľmi alebo relax s kávičkou a dobrou knihou?",
+    "cta": "Rezervovať byt"
   }
 }

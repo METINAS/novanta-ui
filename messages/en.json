@@ -105,5 +105,12 @@
       "reserveFlat": "Reserve a flat",
       "developer": "About the developer"
     }
+  },
+  "ChooseFlat": {
+    "sectionHeading": "Choose your flat",
+    "title-1": "Housing",
+    "title-2": "you've always dreamed of",
+    "description": "Are you looking for housing in an accessible location, a safe home in a private gated community, with a garden or terrace for sitting with friends or relaxing with a coffee and a good book?",
+    "cta": "Reserve a flat"
   }
 }

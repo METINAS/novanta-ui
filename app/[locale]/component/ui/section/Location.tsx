@@ -4,6 +4,7 @@ import {getTranslations} from "next-intl/server";
 import Button from "@/app/[locale]/component/micro/Button";
 import {GoArrowRight} from "react-icons/go";
 import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
+import {syne} from "@/app/[locale]/fonts";
 
 const Location = async () => {
     const t = await getTranslations("Locality");
@@ -18,7 +19,7 @@ const Location = async () => {
                         >
                             {t("sectionTitle")}
                         </SectionHeading>
-                        <div className="flex flex-col gap-2">
+                        <div className={`${syne.className} flex flex-col gap-2`}>
                             <h2>{t("title-1")}</h2>
                             <p className="h2 text-brand font-weight-light">{t("title-2")}</p>
                         </div>

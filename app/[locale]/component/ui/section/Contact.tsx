@@ -3,6 +3,7 @@ import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
 import {getTranslations} from "next-intl/server";
 import Button from "@/app/[locale]/component/micro/Button";
 import {GoDeviceMobile, GoRead} from "react-icons/go";
+import {syne} from "@/app/[locale]/fonts";
 
 const Contact = async () => {
     const t = await getTranslations("Contact");
@@ -20,7 +21,7 @@ const Contact = async () => {
                     <SectionHeading theme="dark" twoSided={true} >
                         {t("sectionTitle")}
                     </SectionHeading>
-                    <div className="flex flex-col gap-2">
+                    <div className={`${syne.className} flex flex-col gap-2`}>
                         <h2 className="text-white">{t("title-1")}</h2>
                         <p className="h2 text-white">{t("title-2")}</p>
                     </div>
