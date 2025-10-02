@@ -4,6 +4,7 @@ import {getTranslations} from "next-intl/server";
 import Button from "@/app/[locale]/component/micro/Button";
 import {GoArrowRight} from "react-icons/go";
 import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
+import {syne} from "@/app/[locale]/fonts";
 
 const Intro = async () => {
     const t = await getTranslations("Intro");
@@ -14,11 +15,11 @@ const Intro = async () => {
                 <div className="flex flex-col gap-4 md:flex-row py-8 md:py-16">
                     <div className="w-full md:w-1/2 flex flex-col gap-4 justify-center">
                         <SectionHeading theme="light">{t("sectionTitle")}</SectionHeading>
-                        <div className="flex flex-col gap-2">
-                            <h2>{t("title-1")}</h2>
-                            <p className="h2 text-brand font-weight-light">{t("title-2")}</p>
+                        <div className={`${syne.className} flex flex-col gap-2`}>
+                            <h2 className="h1">{t("title-1")}</h2>
+                            <p className="h1 text-brand font-weight-light">{t("title-2")}</p>
                         </div>
-                        <p>{t("description")}</p>
+                        <p className="pp-18">{t("description")}</p>
                         <div className="flex">
                             <Button
                                 variant="emerald"

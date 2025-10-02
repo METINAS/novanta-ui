@@ -1,6 +1,8 @@
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import {usePathname} from "next/navigation";
+import {syne} from "@/app/[locale]/fonts";
+import clsx from "clsx";
 
 type MLinkProps = {
     children: React.ReactNode;
@@ -8,6 +10,8 @@ type MLinkProps = {
     className?: string;
     onClick?: (event: React.MouseEvent<HTMLAnchorElement>) => void;
     ariaLabel?: string;
+    type: "nav" | "link";
+    icon?: React.ReactNode;
 };
 
 const MLink: React.FC<MLinkProps> = ({
@@ -16,9 +20,17 @@ const MLink: React.FC<MLinkProps> = ({
                                          className = "",
                                          onClick,
                                          ariaLabel,
+                                         type = "nav",
+                                         icon,
                                      }) => {
     const pathname = usePathname();
     const isActive = pathname === route;
+    const base = `${syne.className} p-4 font-bold pp-16 md:pp-20 hover:underline cursor-pointer decoration-2 underline-offset-4 ${className}`;
+
+    const texture = type === "nav"
+        ? "text-white  decoration-brand"
+        : "text-emerald decoration-emerald"
+    ;
 
     return (
         <Link
@@ -26,9 +38,14 @@ const MLink: React.FC<MLinkProps> = ({
             aria-label={ariaLabel || (typeof children === "string" ? children : undefined)}
             aria-current={isActive ? "page" : undefined}
             onClick={onClick}
-            className={`p-4 pp-16 md:pp-20 text-white hover:underline decoration-brand cursor-pointer decoration-2 underline-offset-4 ${className}`}
+            className={clsx(base, texture)}
         >
-            {children}
+            <div className="flex flex-row gap-2 items-center">
+                {children}
+                {icon && (
+                    icon
+                )}
+            </div>
         </Link>
     );
 };

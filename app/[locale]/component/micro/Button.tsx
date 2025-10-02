@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Button as AriaButton, type ButtonProps as AriaButtonProps } from "react-aria-components";
 import clsx from "clsx";
+import {kanitBold, syne} from "@/app/[locale]/fonts";
 
 type Texture = "solid" | "soft" | "outline" | "ghost";
 type Variant = "brand" | "emerald"; // brand = primary, emerald = secondary
@@ -109,7 +110,7 @@ export function MButton({
                 </span>
             )}
 
-            <span className="inline-flex items-center">
+            <span className={`${syne.className} font-bold inline-flex items-center`}>
                 {loading && (
                     <span
                         aria-hidden

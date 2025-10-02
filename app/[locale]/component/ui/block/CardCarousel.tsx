@@ -35,10 +35,10 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ locale }) => {
     const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi])
 
     return (
-        <div className="w-full px-0 md:px-8">
+        <div className="w-full px-0 md:px-8 min-h-[580px] lg:min-h-[510px]">
             <div className="relative">
 
-                <div ref={emblaRef} className="overflow-hidden">
+                <div ref={emblaRef} className="overflow-hidden h-auto">
                     <div className="flex touch-pan-y md:cursor-grab md:active:cursor-grabbing">
                         {items.map((card, i) => (
                             <div
@@ -51,6 +51,8 @@ const CardCarousel: React.FC<CardCarouselProps> = ({ locale }) => {
                                     image={card.image}
                                     heading={card.heading}
                                     points={card.points}
+                                    description={card.description}
+                                    href={card.href}
                                 />
                             </div>
                         ))}

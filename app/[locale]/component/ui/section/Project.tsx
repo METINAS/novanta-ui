@@ -7,6 +7,7 @@ import Image from "next/image";
 import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
 import Button from "@/app/[locale]/component/micro/Button";
 import { GoArrowRight } from "react-icons/go";
+import {syne} from "@/app/[locale]/fonts";
 
 const kpiValues: KPIReadDTO[] = [
     { value: "kpiValue1", description: "kpiDesc1" },
@@ -32,7 +33,7 @@ const Project = async () => {
 
     return (
         <>
-            <MContainer variant="regular">
+            <MContainer variant="regular" className="mt-8 md:mt-16">
                 <div className="flex-flex-col gap-8">
                     <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 justify-center gap-4">
                         {kpiValues.map(k => (
@@ -59,11 +60,11 @@ const Project = async () => {
 
                     <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
                         <div className="max-w-[820px]">
-                            <SectionHeading theme="light">PROJEKT</SectionHeading>
-                            <h2 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight">
-                                Jedinečné byty
+                            <SectionHeading theme="light">{t("sectionTitle")}</SectionHeading>
+                            <h2 className={`${syne.className} mt-4 text-4xl md:text-5xl font-extrabold leading-tight`}>
+                                {t("title-1")}
                             </h2>
-                            <p className="h2 text-brand mt-1">s komfortom rodinného domu</p>
+                            <p className={`${syne.className} h2 text-brand mt-1`}>{t("title-2")}</p>
                         </div>
 
                         <div className="md:pt-2 md:w-[220px]">
@@ -73,7 +74,7 @@ const Project = async () => {
                                 size="lg"
                                 className="w-full"
                             >
-                                Zistiť viac
+                                {t("cta")}
                             </Button>
                         </div>
                     </div>

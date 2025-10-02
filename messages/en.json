@@ -62,11 +62,10 @@
   },
   "References": {
     "sectionTitle": "DEVELOPER",
-    "title-1": "From the Developer",
-    "title-2": "of Successful Projects",
-    "description1": "Novanta has been operating in the real estate market since 2013, but our experience in construction goes back much further. We are a stable trio of experienced developers complemented by a team of qualified professionals.",
-    "description2": "We have completed several successful residential projects and received awards for architecture and a transparent approach. We focus on comprehensive development from the identification of an investment opportunity, through project preparation, to construction and bringing properties to the market. We don’t just build new buildings, we shape a modern urban environment that will serve future generations as well.",
-    "description3": "Timeless design, innovative technological solutions, and sustainable ecological processes with minimal environmental impact bring an increase in property value. We strive to improve the quality of living and the community already present in the locality.",
+    "title-1": "From the developer",
+    "title-2": "successful projects",
+    "description1": "Novanta has been active in the real estate market since 2013, with a long history in construction. We are a stable team of experienced developers complemented by qualified professionals.",
+    "description2": "We have completed several successful residential projects, received architectural awards, and maintain a transparent approach. We focus on comprehensive development and creating modern urban environments.",
     "cta": "References"
   },
   "Contact": {
@@ -94,6 +93,17 @@
       "locality": "Locality",
       "contact": "Contact",
       "chooseFlat": "Choose your apartment"
+    }
+  },
+  "ReferenceCard": {
+    "readMore": "Read more"
+  },
+  "Hero": {
+    "title": "Novanta Prievoz <br/> — modern housing",
+    "description": "Premium location, timeless architecture, comfort without compromise",
+    "Cta": {
+      "reserveFlat": "Reserve a flat",
+      "developer": "About the developer"
     }
   }
 }

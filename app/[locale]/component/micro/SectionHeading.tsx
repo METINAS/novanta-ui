@@ -1,4 +1,5 @@
 import React from "react";
+import {syne} from "@/app/[locale]/fonts";
 
 type SectionHeadingProps = {
     children?: React.ReactNode
@@ -10,7 +11,7 @@ type SectionHeadingProps = {
 const SectionHeading: React.FC<SectionHeadingProps> = ({ children, twoSided = false, className, theme = "light" }) => {
     return (
         <>
-            <div className={`flex flex-row items-center gap-2 ${className}`}>
+            <div className={`flex flex-row items-center gap-2 ${className} ${syne.className} font-bold`}>
                 <span className={`w-16 ${theme === "light" ? "bg-black" : "bg-white"} h-[2px]`}/>
                 <p className={`pp-18 uppercase font-bold ${theme === "light" ? "text-black" : "text-white"}`}>{children}</p>
                 {twoSided &&

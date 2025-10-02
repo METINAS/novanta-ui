@@ -6,7 +6,7 @@ import {notFound} from "next/navigation";
 import {getMessages} from "next-intl/server";
 import Footer from "@/app/[locale]/component/layout/Footer";
 import Navbar from "@/app/[locale]/component/layout/Navbar";
-import {manrope} from "@/app/[locale]/fonts";
+import {kanitBold, manrope, raleway, syne} from "@/app/[locale]/fonts";
 
 type Params = Promise<{ locale: string }>;
 
@@ -30,7 +30,7 @@ export default async function RootLayout({ children, params }: { children: React
 
     return (
         <html lang={locale}>
-            <body className={`${manrope.className} w-full`}>
+            <body className={`${raleway.className} w-full`}>
                 <NextIntlClientProvider messages={messages}>
                     <Navbar />
                     {children}
