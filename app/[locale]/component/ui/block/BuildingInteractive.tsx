@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 type FloorShape = { points: string };
 
@@ -30,10 +30,8 @@ export default function BuildingInteractive({
                                                 className,
                                             }: Props) {
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const svgRef = useRef<SVGSVGElement>(null);
     const [hoverId, setHoverId] = useState<string | null>(null);
     const [tooltip, setTooltip] = useState<{ left: number; top: number; text: string } | null>(null);
-
     const [vb, setVb] = React.useState(`0 0 ${viewBox.width} ${viewBox.height}`);
 
     React.useEffect(() => {
@@ -125,7 +123,11 @@ export default function BuildingInteractive({
     const handlePointerDown = (e: React.PointerEvent<SVGGElement>, f: Floor) => {
         setHoverId(f.id);
         showTooltipAtClient(e.clientX, e.clientY, f.label);
-        (e.currentTarget as any).releasePointerCapture?.(e.pointerId);
+
+        const target = e.currentTarget as SVGGElement;
+        if ("releasePointerCapture" in target) {
+            target.releasePointerCapture?.(e.pointerId);
+        }
     };
 
     return (
