@@ -295,67 +295,72 @@ const flats: Flat[] = [
     }
 ];
 
-const FlatList = async () => {
-    const t = await getTranslations("Table")
+const groupByFloor = (items: Flat[]) =>
+    items.reduce<Record<number, Flat[]>>((acc, f) => {
+        (acc[f.floor] ??= []).push(f);
+        return acc;
+    }, {});
 
-    const floor1Flats = flats.filter(flat => flat.floor === 1);
-    const floor2Flats = flats.filter(flat => flat.floor === 2);
-    const floor3Flats = flats.filter(flat => flat.floor === 3);
-    const floor4Flats = flats.filter(flat => flat.floor === 4);
-    const floor5Flats = flats.filter(flat => flat.floor === 5);
-    const floor6Flats = flats.filter(flat => flat.floor === 6);
-    const floor7Flats = flats.filter(flat => flat.floor === 7);
+const FlatList = async () => {
+    const t = await getTranslations("Table");
+
+    const headers = [
+        t("flatNumber"),
+        t("floor"),
+        t("roomCount"),
+        t("interior"),
+        t("exterior"),
+        t("cellar"),
+        t("total"),
+        t("price"),
+        t("state"),
+        t("floorPlan"),
+    ];
+
+    const flatsByFloor = groupByFloor(flats);
+    const floors = Object.keys(flatsByFloor)
+        .map(Number)
+        .sort((a, b) => a - b);
 
     return (
-        <>
-            <MContainer variant="full" className={`bg-white py-8 md:py-16`}>
-                <MContainer variant="regular">
-                    <div className="grid grid-cols-10 text-center justify-center items-center overflow-x-auto mb-8">
-                        {tableLabel.map((label) => (
-                            <p className="text-sm text-black font-bold">{t(label.label)}</p>
-                        ))}
-                    </div>
-                    <div className="flex flex-col gap-8">
-                        <div className="block">
-                            {floor1Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor2Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor3Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor4Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor5Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor6Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
-                        </div>
-                        <div className="block">
-                            {floor7Flats.map((flat) => (
-                                <ListItem key={flat.id} id={flat.id} flatNumber={flat.flatNumber} floor={flat.floor} roomCount={flat.roomCount} interiorMSquared={flat.interiorMSquared} exteriorMSquared={flat.exteriorMSquared} cellarMSquared={flat.cellarMSquared} totalMSquared={flat.totalMSquared} price={flat.price} state={flat.state} floorPlan={flat.floorPlan} />
-                            ))}
+        <MContainer variant="full" className="bg-white py-8 md:py-16">
+            <MContainer variant="regular">
+                {floors.length === 0 ? (
+                    <p className="text-center text-sm text-gray-500">{t("noData")}</p>
+                ) : (
+
+                    <div className="overflow-x-auto">
+                        <div className="min-w-[960px]">
+
+                            <div className="grid grid-cols-10 text-center items-center font-bold">
+                                {headers.map((h, i) => (
+                                    <p key={i} className="text-sm text-black p-2">
+                                        {h}
+                                    </p>
+                                ))}
+                            </div>
+
+                            <div className="flex flex-col">
+                                {floors.map((floor) => {
+                                    const list = flatsByFloor[floor];
+
+                                    return (
+                                        <section key={floor}>
+                                            <div className="flex flex-col">
+                                                {list.map((flat, idx) => (
+                                                    <ListItem key={flat.id} indexInGroup={idx} {...flat} />
+                                                ))}
+                                            </div>
+                                        </section>
+                                    );
+                                })}
+                            </div>
                         </div>
                     </div>
-                </MContainer>
+                )}
             </MContainer>
-        </>
-    )
-}
+        </MContainer>
+    );
+};
 
 export default FlatList;

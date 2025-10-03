@@ -1,4 +1,3 @@
-// app/components/BuildingInteractive.tsx
 "use client";
 
 import React, { useMemo, useRef, useState } from "react";
@@ -31,19 +30,67 @@ export default function BuildingInteractive({
                                                 className,
                                             }: Props) {
     const wrapperRef = useRef<HTMLDivElement>(null);
+    const svgRef = useRef<SVGSVGElement>(null);
     const [hoverId, setHoverId] = useState<string | null>(null);
     const [tooltip, setTooltip] = useState<{ left: number; top: number; text: string } | null>(null);
 
-    const vb = useMemo(() => `0 0 ${viewBox.width} ${viewBox.height}`, [viewBox]);
+    const [vb, setVb] = React.useState(`0 0 ${viewBox.width} ${viewBox.height}`);
 
-    const handleMouseMove = (e: React.MouseEvent<SVGGElement>, text: string) => {
+    React.useEffect(() => {
+        const computeVb = () => {
+            const isMobile = window.innerWidth < 768;
+            if (isMobile) {
+                const offsetX = viewBox.width * 0.05;
+                const offsetY = viewBox.height * 0.05;
+                setVb(`${offsetX} ${offsetY} ${viewBox.width - 2 * offsetX} ${viewBox.height - 2 * offsetY}`);
+            } else {
+                setVb(`0 0 ${viewBox.width} ${viewBox.height}`);
+            }
+        };
+
+        computeVb();
+        window.addEventListener("resize", computeVb, { passive: true });
+        return () => window.removeEventListener("resize", computeVb);
+    }, [viewBox.width, viewBox.height]);
+
+    const svgToClient = (x: number, y: number) => {
+        const rect = wrapperRef.current?.getBoundingClientRect();
+        if (!rect) return { left: 0, top: 0 };
+        const scaleX = rect.width / viewBox.width;
+        const scaleY = rect.height / viewBox.height;
+        return { left: x * scaleX, top: y * scaleY };
+    };
+
+    const centroidFromPoints = (points: string) => {
+        const pts = points
+            .trim()
+            .split(/\s+/)
+            .map((p) => p.split(",").map(Number))
+            .filter(([x, y]) => Number.isFinite(x) && Number.isFinite(y)) as [number, number][];
+        if (!pts.length) return { x: 0, y: 0 };
+        const { x, y } = pts.reduce(
+            (acc, [px, py]) => ({ x: acc.x + px, y: acc.y + py }),
+            { x: 0, y: 0 }
+        );
+        return { x: x / pts.length, y: y / pts.length };
+    };
+
+    const showTooltipAtClient = (clientX: number, clientY: number, text: string) => {
         const rect = wrapperRef.current?.getBoundingClientRect();
         if (!rect) return;
         setTooltip({
-            left: e.clientX - rect.left + 8,
-            top: e.clientY - rect.top - 28,
+            left: clientX - rect.left + 8,
+            top: clientY - rect.top - 28,
             text,
         });
+    };
+
+    const showTooltipAtCentroid = (f: Floor) => {
+        const polys: FloorShape[] = f.shapes ?? (f.points ? [{ points: f.points }] : []);
+        if (!polys.length) return;
+        const c = centroidFromPoints(polys[0].points);
+        const { left, top } = svgToClient(c.x, c.y);
+        setTooltip({ left, top: Math.max(0, top - 28), text: f.label });
     };
 
     const handleLeave = () => {
@@ -55,18 +102,51 @@ export default function BuildingInteractive({
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             onSelect?.(floor);
+        } else if (e.key === "Escape") {
+            handleLeave();
+        } else {
+            if (!tooltip) showTooltipAtCentroid(floor);
         }
     };
 
+    const handlePointerEnter = (_e: React.PointerEvent<SVGGElement>, f: Floor) => {
+        setHoverId(f.id);
+    };
+
+    const handlePointerLeave = () => {
+        handleLeave();
+    };
+
+    const handlePointerMove = (e: React.PointerEvent<SVGGElement>, text: string) => {
+        if (e.pointerType !== "mouse" && e.pressure === 0) return;
+        showTooltipAtClient(e.clientX, e.clientY, text);
+    };
+
+    const handlePointerDown = (e: React.PointerEvent<SVGGElement>, f: Floor) => {
+        setHoverId(f.id);
+        showTooltipAtClient(e.clientX, e.clientY, f.label);
+        (e.currentTarget as any).releasePointerCapture?.(e.pointerId);
+    };
+
     return (
-        <div ref={wrapperRef} className={`relative w-full ${className ?? ""}`}>
+        <div
+            ref={wrapperRef}
+            className={`relative w-full overflow-hidden ${className ?? ""}`}
+        >
             <svg
                 viewBox={vb}
-                className="w-full select-none"
+                className="w-full select-none transform md:scale-100 scale-110"
                 role="img"
                 aria-label="Interactive building"
+                style={{ transformOrigin: "center top" }}
             >
-                <image href={imageSrc} x="0" y="0" width={viewBox.width} height={viewBox.height} />
+                <image
+                    href={imageSrc}
+                    x="0"
+                    y="0"
+                    width={viewBox.width}
+                    height={viewBox.height}
+                />
 
                 {floors.map((f) => {
                     const polys: FloorShape[] = f.shapes ?? (f.points ? [{ points: f.points }] : []);
@@ -79,13 +159,17 @@ export default function BuildingInteractive({
                             tabIndex={0}
                             aria-label={f.label}
                             className="focus:outline-none"
-                            onMouseEnter={() => setHoverId(f.id)}
-                            onMouseLeave={handleLeave}
-                            onMouseMove={(e) => handleMouseMove(e, f.label)}
-                            onClick={() => onSelect?.(f)}
-                            onFocus={() => setHoverId(f.id)}
+                            onFocus={() => {
+                                setHoverId(f.id);
+                                showTooltipAtCentroid(f);
+                            }}
                             onBlur={handleLeave}
                             onKeyDown={(e) => handleKey(e, f)}
+                            onPointerEnter={(e) => handlePointerEnter(e, f)}
+                            onPointerLeave={handlePointerLeave}
+                            onPointerMove={(e) => handlePointerMove(e, f.label)}
+                            onPointerDown={(e) => handlePointerDown(e, f)}
+                            onClick={() => onSelect?.(f)}
                         >
                             {polys.map((p, i) => (
                                 <polygon
