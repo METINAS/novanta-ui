@@ -27,7 +27,7 @@ export default function BuildingInteractive({
                                                 viewBox,
                                                 floors,
                                                 onSelect,
-                                                highlightColor = "rgba(255, 51, 0, 0.50)",
+                                                highlightColor = "rgba(255, 51, 0, 0.40)",
                                                 className,
                                             }: Props) {
     const wrapperRef = useRef<HTMLDivElement>(null);
