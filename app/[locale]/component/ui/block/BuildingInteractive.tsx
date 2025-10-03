@@ -62,14 +62,13 @@ export default function BuildingInteractive({
         <div ref={wrapperRef} className={`relative w-full ${className ?? ""}`}>
             <svg
                 viewBox={vb}
-                className="w-full h-auto select-none"
+                className="w-full select-none"
                 role="img"
                 aria-label="Interactive building"
             >
                 <image href={imageSrc} x="0" y="0" width={viewBox.width} height={viewBox.height} />
 
                 {floors.map((f) => {
-                    // normalize to an array of polygons
                     const polys: FloorShape[] = f.shapes ?? (f.points ? [{ points: f.points }] : []);
                     const isHover = hoverId === f.id;
 
@@ -92,10 +91,9 @@ export default function BuildingInteractive({
                                 <polygon
                                     key={`${f.id}-${i}`}
                                     points={p.points}
-                                    // Use nearly-transparent fill when idle to ensure reliable hit-testing on angled thin areas
                                     fill={isHover ? highlightColor : "rgba(0,0,0,0.001)"}
                                     stroke="transparent"
-                                    className="cursor-pointer transition-[fill] duration-150 focus:ring-2 focus:ring-blue-700"
+                                    className="cursor-pointer transition-[fill] duration-150 focus:ring-2 focus:ring-brand"
                                     pointerEvents="all"
                                 />
                             ))}

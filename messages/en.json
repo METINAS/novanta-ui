@@ -112,5 +112,22 @@
     "title-2": "you've always dreamed of",
     "description": "Are you looking for housing in an accessible location, a safe home in a private gated community, with a garden or terrace for sitting with friends or relaxing with a coffee and a good book?",
     "cta": "Reserve a flat"
+  },
+  "Table": {
+    "flatNumber": "Flat Number",
+    "floor": "Floor",
+    "roomCount": "Number of Rooms",
+    "interiorMSquared": "Interior [m²]",
+    "exteriorMSquared": "Exterior [m²]",
+    "cellarMSquared": "Cellar [m²]",
+    "totalMSquared": "Total [m²]",
+    "price": "Price [€]",
+    "state": "Status",
+    "floorPlan": "Floor Plan",
+    "FlatState": {
+      "available": "Available",
+      "sold": "Sold",
+      "reserved": "Reserved"
+    }
   }
 }
