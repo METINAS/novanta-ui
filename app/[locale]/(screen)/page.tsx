@@ -8,6 +8,7 @@ import Contact from "@/app/[locale]/component/ui/section/Contact";
 import ChooseFlat from "@/app/[locale]/component/ui/section/ChooseFlat";
 import Model from "@/app/[locale]/component/ui/section/Model";
 import FlatList from "@/app/[locale]/component/ui/section/FlatList";
+import Timeline from "@/app/[locale]/component/ui/section/Timeline";
 
 const gallery1Images = [
     "/image/client/landing/gallery_1.png",
@@ -43,6 +44,8 @@ export default function Home() {
                 <div className="relative z-10">
                     <FlatList />
                 </div>
+
+                <Timeline />
 
                 <div className="hidden md:block">
                     <ImageGallery images={gallery2Images} />

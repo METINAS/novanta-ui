@@ -340,7 +340,7 @@ const FlatList = async () => {
                                 ))}
                             </div>
 
-                            <div className="flex flex-col">
+                            <div className="flex flex-col gap-6 md:gap-8">
                                 {floors.map((floor) => {
                                     const list = flatsByFloor[floor];
 
@@ -358,6 +358,11 @@ const FlatList = async () => {
                         </div>
                     </div>
                 )}
+                <div className="w-full flex py-4">
+                    <p className="pp-16 w-full md:w-1/3">
+                        {t("description")}
+                    </p>
+                </div>
             </MContainer>
         </MContainer>
     );

@@ -1,6 +1,7 @@
 import React from "react";
 import { getTranslations } from "next-intl/server";
 import { Flat } from "@/app/[locale]/component/ui/section/FlatList";
+import {Link} from "@/i18n/routing";
 
 type ListItemProps = Flat & { indexInGroup: number };
 
@@ -19,6 +20,8 @@ const ListItem: React.FC<ListItemProps> = async ({
                                                      indexInGroup,
                                                  }) => {
     const tState = await getTranslations("Table.FlatState");
+    const t = await getTranslations("Table");
+
     const rowBg = indexInGroup % 2 === 0 ? "bg-white" : "bg-[#DEE2E8]";
 
     return (
@@ -34,7 +37,9 @@ const ListItem: React.FC<ListItemProps> = async ({
             <p>{totalMSquared}m²</p>
             <p>{price}€</p>
             <p>{tState(state)}</p>
-            <p className="truncate">{floorPlan}</p>
+            <Link href={floorPlan} className={`text-brand hover:text-brand-hover active:text-brand-pressed transition-all`}>
+                <p>{t("showFloorPlan")}</p>
+            </Link>
         </div>
     );
 };

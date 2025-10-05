@@ -128,6 +128,27 @@
       "available": "voľný",
       "sold": "predaný",
       "reserved": "rezervovaný"
+    },
+    "showFloorPlan": "Zobraziť",
+    "description": "Uvedené výmery sú priebežné a nemusia sa zhodovať s realizačným projektom. V rozlohe bytu je započítaná výmera vnútorných priečok, bez záhrady, terasy alebo loggie."
+  },
+  "Timeline": {
+    "section_title": "Časová os",
+    "heading": "Postup výstavby",
+    "description": "Sledujte, v akej fáze sa momentálne projekt nachádza – od získania stavebného povolenia až po kolaudáciu a odovzdanie bytov novým majiteľom.",
+    "Label": {
+      "building_permit": "Stavebné povolenie",
+      "sales_launch": "Spustenie predaja",
+      "construction_start": "Začiatok výstavby",
+      "construction_end": "Ukončenie výstavby",
+      "approval_and_transfer": "Kolaudácia, prevod bytov"
+    },
+    "Date": {
+      "target1": "07/2025",
+      "target2": "09/2025",
+      "target3": "03/2026",
+      "target4": "12/2026",
+      "target5": "06/2027"
     }
   }
 }
