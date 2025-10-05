@@ -1,15 +1,18 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, {useRef, useState} from "react";
+import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
+import {AvailabilityMap} from "@/app/[locale]/util/buildAvailability";
+import {useTranslations} from "next-intl";
 
 type FloorShape = { points: string };
 
-type Floor = {
+export type Floor = {
     id: string;
     points?: string;
     shapes?: FloorShape[];
     label: string;
-    meta?: Record<string, unknown>;
+    meta?: { floorNumber?: number } & Record<string, unknown>;
 };
 
 type Props = {
@@ -19,6 +22,8 @@ type Props = {
     onSelect?: (floor: Floor) => void;
     highlightColor?: string;
     className?: string;
+    availability?: AvailabilityMap;
+    roomBuckets?: number[];
 };
 
 export default function BuildingInteractive({
@@ -28,10 +33,15 @@ export default function BuildingInteractive({
                                                 onSelect,
                                                 highlightColor = "rgba(255, 51, 0, 0.40)",
                                                 className,
+                                                availability,
+                                                roomBuckets = [1, 2, 3, 4, 5],
                                             }: Props) {
+    const t = useTranslations("BuildingInteractive");
+
     const wrapperRef = useRef<HTMLDivElement>(null);
     const [hoverId, setHoverId] = useState<string | null>(null);
-    const [tooltip, setTooltip] = useState<{ left: number; top: number; text: string } | null>(null);
+    const [hoverFloorNo, setHoverFloorNo] = useState<number | null>(null);
+    const [tooltip, setTooltip] = useState<{ left: number; top: number } | null>(null);
     const [vb, setVb] = React.useState(`0 0 ${viewBox.width} ${viewBox.height}`);
 
     React.useEffect(() => {
@@ -47,16 +57,16 @@ export default function BuildingInteractive({
         };
 
         computeVb();
-        window.addEventListener("resize", computeVb, { passive: true });
+        window.addEventListener("resize", computeVb, {passive: true});
         return () => window.removeEventListener("resize", computeVb);
     }, [viewBox.width, viewBox.height]);
 
     const svgToClient = (x: number, y: number) => {
         const rect = wrapperRef.current?.getBoundingClientRect();
-        if (!rect) return { left: 0, top: 0 };
+        if (!rect) return {left: 0, top: 0};
         const scaleX = rect.width / viewBox.width;
         const scaleY = rect.height / viewBox.height;
-        return { left: x * scaleX, top: y * scaleY };
+        return {left: x * scaleX, top: y * scaleY};
     };
 
     const centroidFromPoints = (points: string) => {
@@ -65,30 +75,29 @@ export default function BuildingInteractive({
             .split(/\s+/)
             .map((p) => p.split(",").map(Number))
             .filter(([x, y]) => Number.isFinite(x) && Number.isFinite(y)) as [number, number][];
-        if (!pts.length) return { x: 0, y: 0 };
-        const { x, y } = pts.reduce(
-            (acc, [px, py]) => ({ x: acc.x + px, y: acc.y + py }),
-            { x: 0, y: 0 }
+        if (!pts.length) return {x: 0, y: 0};
+        const {x, y} = pts.reduce(
+            (acc, [px, py]) => ({x: acc.x + px, y: acc.y + py}),
+            {x: 0, y: 0}
         );
-        return { x: x / pts.length, y: y / pts.length };
+        return {x: x / pts.length, y: y / pts.length};
     };
 
-    const showTooltipAtClient = (clientX: number, clientY: number, text: string) => {
+    const showTooltipAtClient = (clientX: number, clientY: number) => {
         const rect = wrapperRef.current?.getBoundingClientRect();
         if (!rect) return;
         setTooltip({
             left: clientX - rect.left + 8,
             top: clientY - rect.top - 28,
-            text,
         });
     };
 
     const showTooltipAtCentroid = (f: Floor) => {
-        const polys: FloorShape[] = f.shapes ?? (f.points ? [{ points: f.points }] : []);
+        const polys: FloorShape[] = f.shapes ?? (f.points ? [{points: f.points}] : []);
         if (!polys.length) return;
         const c = centroidFromPoints(polys[0].points);
-        const { left, top } = svgToClient(c.x, c.y);
-        setTooltip({ left, top: Math.max(0, top - 28), text: f.label });
+        const {left, top} = svgToClient(c.x, c.y);
+        setTooltip({left, top: Math.max(0, top - 28)});
     };
 
     const handleLeave = () => {
@@ -109,20 +118,23 @@ export default function BuildingInteractive({
 
     const handlePointerEnter = (_e: React.PointerEvent<SVGGElement>, f: Floor) => {
         setHoverId(f.id);
+        setHoverFloorNo(f.meta?.floorNumber ?? null);
     };
 
     const handlePointerLeave = () => {
         handleLeave();
     };
 
-    const handlePointerMove = (e: React.PointerEvent<SVGGElement>, text: string) => {
+    const handlePointerMove = (e: React.PointerEvent<SVGGElement>, f: Floor) => {
         if (e.pointerType !== "mouse" && e.pressure === 0) return;
-        showTooltipAtClient(e.clientX, e.clientY, text);
+        setHoverFloorNo(f.meta?.floorNumber ?? null);
+        showTooltipAtClient(e.clientX, e.clientY);
     };
 
     const handlePointerDown = (e: React.PointerEvent<SVGGElement>, f: Floor) => {
         setHoverId(f.id);
-        showTooltipAtClient(e.clientX, e.clientY, f.label);
+        setHoverFloorNo(f.meta?.floorNumber ?? null);
+        showTooltipAtClient(e.clientX, e.clientY);
 
         const target = e.currentTarget as SVGGElement;
         if ("releasePointerCapture" in target) {
@@ -140,7 +152,7 @@ export default function BuildingInteractive({
                 className="w-full select-none transform md:scale-100 scale-110"
                 role="img"
                 aria-label="Interactive building"
-                style={{ transformOrigin: "center top" }}
+                style={{transformOrigin: "center top"}}
             >
                 <image
                     href={imageSrc}
@@ -151,7 +163,7 @@ export default function BuildingInteractive({
                 />
 
                 {floors.map((f) => {
-                    const polys: FloorShape[] = f.shapes ?? (f.points ? [{ points: f.points }] : []);
+                    const polys: FloorShape[] = f.shapes ?? (f.points ? [{points: f.points}] : []);
                     const isHover = hoverId === f.id;
 
                     return (
@@ -169,7 +181,7 @@ export default function BuildingInteractive({
                             onKeyDown={(e) => handleKey(e, f)}
                             onPointerEnter={(e) => handlePointerEnter(e, f)}
                             onPointerLeave={handlePointerLeave}
-                            onPointerMove={(e) => handlePointerMove(e, f.label)}
+                            onPointerMove={(e) => handlePointerMove(e, f)}
                             onPointerDown={(e) => handlePointerDown(e, f)}
                             onClick={() => onSelect?.(f)}
                         >
@@ -188,12 +200,28 @@ export default function BuildingInteractive({
                 })}
             </svg>
 
-            {tooltip && (
+            {tooltip && hoverFloorNo != null && (
                 <div
-                    className="absolute z-10 rounded-md bg-white/95 px-2 py-1 text-xs shadow-lg border border-black/5"
+                    className="hidden md:flex flex-col absolute z-10 shadow-lg"
                     style={{ left: tooltip.left, top: tooltip.top, pointerEvents: "none" }}
                 >
-                    {tooltip.text}
+                    <div className="bg-emerald p-4">
+                        <SectionHeading theme="dark">{hoverFloorNo}. {t("floor")}</SectionHeading>
+                    </div>
+
+                    <div className="bg-white p-4 flex flex-col gap-2">
+                        <h6>{t("available_flats")}</h6>
+
+                        {roomBuckets.map((rooms) => {
+                            const count = availability?.[hoverFloorNo]?.[rooms] ?? 0;
+                            return (
+                                <div key={rooms} className="flex flex-row justify-between items-center">
+                                    <p className="pp-18 font-bold">{rooms} {t("room")}</p>
+                                    <p className="pp-18">{count}</p>
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
             )}
         </div>

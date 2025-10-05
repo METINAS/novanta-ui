@@ -2,6 +2,7 @@ import React from "react";
 import MContainer from "@/app/[locale]/component/layout/MContainer";
 import {getTranslations} from "next-intl/server";
 import ListItem from "@/app/[locale]/component/micro/ListItem";
+import {groupByFloor} from "@/app/[locale]/util/buildAvailability";
 
 type State = "available" | "sold" | "reserved";
 
@@ -32,7 +33,7 @@ const tableLabel = [
     { label: "floorPlan" },
 ]
 
-const flats: Flat[] = [
+export const flats: Flat[] = [
     {
         id: 1,
         flatNumber: "A1",
@@ -44,7 +45,7 @@ const flats: Flat[] = [
         totalMSquared: 45.7,
         price: 120000,
         state: "available",
-        floorPlan: "/plans/A1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 2,
@@ -57,7 +58,7 @@ const flats: Flat[] = [
         totalMSquared: 70.4,
         price: 165000,
         state: "reserved",
-        floorPlan: "/plans/B1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 3,
@@ -70,7 +71,7 @@ const flats: Flat[] = [
         totalMSquared: 35.2,
         price: 95000,
         state: "sold",
-        floorPlan: "/plans/C1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 4,
@@ -83,7 +84,7 @@ const flats: Flat[] = [
         totalMSquared: 54.4,
         price: 135000,
         state: "available",
-        floorPlan: "/plans/D1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 5,
@@ -96,7 +97,7 @@ const flats: Flat[] = [
         totalMSquared: 81.2,
         price: 195000,
         state: "sold",
-        floorPlan: "/plans/E1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 6,
@@ -109,7 +110,7 @@ const flats: Flat[] = [
         totalMSquared: 101.2,
         price: 250000,
         state: "available",
-        floorPlan: "/plans/F1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 7,
@@ -122,7 +123,7 @@ const flats: Flat[] = [
         totalMSquared: 51.5,
         price: 130000,
         state: "reserved",
-        floorPlan: "/plans/G1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 8,
@@ -135,7 +136,7 @@ const flats: Flat[] = [
         totalMSquared: 37.8,
         price: 100000,
         state: "available",
-        floorPlan: "/plans/H1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 9,
@@ -148,7 +149,7 @@ const flats: Flat[] = [
         totalMSquared: 73.8,
         price: 180000,
         state: "sold",
-        floorPlan: "/plans/I1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 10,
@@ -161,7 +162,7 @@ const flats: Flat[] = [
         totalMSquared: 57.9,
         price: 145000,
         state: "available",
-        floorPlan: "/plans/J1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 11,
@@ -174,7 +175,7 @@ const flats: Flat[] = [
         totalMSquared: 104.8,
         price: 260000,
         state: "reserved",
-        floorPlan: "/plans/K1.png",
+        floorPlan: "url/to/pdf",
     },
     {
         id: 12,
@@ -187,119 +188,9 @@ const flats: Flat[] = [
         totalMSquared: 84.4,
         price: 200000,
         state: "available",
-        floorPlan: "/plans/L1.png",
+        floorPlan: "url/to/pdf",
     },
-    {
-        id: 13,
-        flatNumber: "M1",
-        floor: 5,
-        roomCount: 2,
-        interiorMSquared: 39.7,
-        exteriorMSquared: 8.9,
-        cellarMSquared: 4,
-        totalMSquared: 52.6,
-        price: 138000,
-        state: "sold",
-        floorPlan: "/plans/M1.png",
-    },
-    {
-        id: 14,
-        flatNumber: "N1",
-        floor: 5,
-        roomCount: 1,
-        interiorMSquared: 27.9,
-        exteriorMSquared: 3.8,
-        cellarMSquared: 3,
-        totalMSquared: 34.7,
-        price: 93000,
-        state: "available",
-        floorPlan: "/plans/N1.png",
-    },
-    {
-        id: 15,
-        flatNumber: "O1",
-        floor: 5,
-        roomCount: 3,
-        interiorMSquared: 58.5,
-        exteriorMSquared: 9.5,
-        cellarMSquared: 5,
-        totalMSquared: 73.0,
-        price: 185000,
-        state: "reserved",
-        floorPlan: "/plans/O1.png",
-    },
-    {
-        id: 16,
-        flatNumber: "P1",
-        floor: 6,
-        roomCount: 2,
-        interiorMSquared: 44.2,
-        exteriorMSquared: 7.6,
-        cellarMSquared: 4,
-        totalMSquared: 55.8,
-        price: 142000,
-        state: "available",
-        floorPlan: "/plans/P1.png",
-    },
-    {
-        id: 17,
-        flatNumber: "Q1",
-        floor: 6,
-        roomCount: 4,
-        interiorMSquared: 82.7,
-        exteriorMSquared: 16.0,
-        cellarMSquared: 8,
-        totalMSquared: 106.7,
-        price: 270000,
-        state: "sold",
-        floorPlan: "/plans/Q1.png",
-    },
-    {
-        id: 18,
-        flatNumber: "R1",
-        floor: 6,
-        roomCount: 3,
-        interiorMSquared: 61.3,
-        exteriorMSquared: 10.4,
-        cellarMSquared: 6,
-        totalMSquared: 77.7,
-        price: 190000,
-        state: "available",
-        floorPlan: "/plans/R1.png",
-    },
-    {
-        id: 19,
-        flatNumber: "S1",
-        floor: 7,
-        roomCount: 2,
-        interiorMSquared: 41.8,
-        exteriorMSquared: 7.2,
-        cellarMSquared: 4,
-        totalMSquared: 53.0,
-        price: 140000,
-        state: "reserved",
-        floorPlan: "/plans/S1.png",
-    },
-    {
-        id: 20,
-        flatNumber: "T1",
-        floor: 7,
-        roomCount: 3,
-        interiorMSquared: 65.0,
-        exteriorMSquared: 11.5,
-        cellarMSquared: 6,
-        totalMSquared: 82.5,
-        price: 205000,
-        state: "available",
-        floorPlan: "/plans/T1.png",
-    }
 ];
-
-const groupByFloor = (items: Flat[]) =>
-    items.reduce<Record<number, Flat[]>>((acc, f) => {
-        (acc[f.floor] ??= []).push(f);
-        return acc;
-    }, {});
 
 const FlatList = async () => {
     const t = await getTranslations("Table");

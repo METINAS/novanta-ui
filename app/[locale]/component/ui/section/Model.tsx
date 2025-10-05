@@ -1,24 +1,19 @@
 'use client'
 
 import MContainer from "@/app/[locale]/component/layout/MContainer";
-import BuildingInteractive from "@/app/[locale]/component/ui/block/BuildingInteractive";
+import BuildingInteractive, {Floor} from "@/app/[locale]/component/ui/block/BuildingInteractive";
+import {buildAvailability} from "@/app/[locale]/util/buildAvailability";
+import {flats} from "@/app/[locale]/component/ui/section/FlatList";
 
-const Model = () => {
-    return (
-        <>
-            <MContainer variant="full" className={`bg-linear-to-b from-[#E6E9EC] to-[#DFE3E8]`}>
-                <MContainer variant="regular">
-                    <BuildingInteractive
-                        imageSrc="/image/model/AXO6.png"
-                        viewBox={{width: 1600, height: 1600}}
-                        floors={[
-                            {
-                                id: "f4",
-                                label: "Floor 4",
-                                shapes: [
-                                    {
-                                        points:
-                                            `
+const availability = buildAvailability(flats);
+
+const floors: Floor[] = [
+    { id: "f4",
+        label: "Floor 4",
+        shapes: [
+            {
+                points:
+                    `
                                         470, 700
                                         470, 662.5 
                                         620,610 
@@ -32,16 +27,17 @@ const Model = () => {
                                         1250,605
                                         770,805
                                     `
-                                    },
-                                ],
-                            },
-                            {
-                                id: "f3",
-                                label: "Floor 3",
-                                shapes: [
-                                    {
-                                        points:
-                                            `
+            },
+        ],
+        meta: { floorNumber: 4 }
+    },
+    {
+        id: "f3",
+        label: "Floor 3",
+        shapes: [
+            {
+                points:
+                    `
                                         267.5, 862.5
                                         267.5, 845
                                         285, 840
@@ -73,16 +69,17 @@ const Model = () => {
                                         705, 970
                                         620, 1010
                                     `
-                                    }
-                                ]
-                            },
-                            {
-                                id: "f2",
-                                label: "Floor 2",
-                                shapes: [
-                                    {
-                                        points:
-                                            `
+            }
+        ],
+        meta: { floorNumber: 3 }
+    },
+    {
+        id: "f2",
+        label: "Floor 2",
+        shapes: [
+            {
+                points:
+                    `
                                         1290, 740
                                         1290, 700
                                         1245, 720
@@ -124,16 +121,17 @@ const Model = () => {
                                         1345, 800  
                                         1345, 760                                       
                                     `
-                                    }
-                                ]
-                            },
-                            {
-                                id: "f1",
-                                label: "Floor 1",
-                                shapes: [
-                                    {
-                                        points:
-                                            `
+            }
+        ],
+        meta: { floorNumber: 2 }
+    },
+    {
+        id: "f1",
+        label: "Floor 1",
+        shapes: [
+            {
+                points:
+                    `
                                         1345, 795
                                         1295, 820
                                         1295, 835
@@ -181,11 +179,23 @@ const Model = () => {
                                         1380, 875
                                         1340, 865                                       
                                     `
-                                    }
-                                ]
-                            }
-                        ]}
+            }
+        ],
+        meta: { floorNumber: 1 }
+    }
+]
+
+const Model = () => {
+    return (
+        <>
+            <MContainer variant="full" className={`bg-linear-to-b from-[#E6E9EC] to-[#DFE3E8]`}>
+                <MContainer variant="regular">
+                    <BuildingInteractive
+                        imageSrc="/image/model/AXO6.png"
+                        viewBox={{width: 1600, height: 1600}}
+                        floors={floors}
                         onSelect={(f) => console.log("Selected", f.id)}
+                        availability={availability}
                     />
                 </MContainer>
             </MContainer>
