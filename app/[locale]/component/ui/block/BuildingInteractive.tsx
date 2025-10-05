@@ -4,6 +4,8 @@ import React, {useRef, useState} from "react";
 import SectionHeading from "@/app/[locale]/component/micro/SectionHeading";
 import {AvailabilityMap} from "@/app/[locale]/util/buildAvailability";
 import {useTranslations} from "next-intl";
+import { useRouter } from "next/navigation";
+import {useLocale} from "use-intl";
 
 type FloorShape = { points: string };
 
@@ -43,6 +45,9 @@ export default function BuildingInteractive({
     const [hoverFloorNo, setHoverFloorNo] = useState<number | null>(null);
     const [tooltip, setTooltip] = useState<{ left: number; top: number } | null>(null);
     const [vb, setVb] = React.useState(`0 0 ${viewBox.width} ${viewBox.height}`);
+
+    const router = useRouter();
+    const locale = useLocale();
 
     React.useEffect(() => {
         const computeVb = () => {
@@ -108,12 +113,17 @@ export default function BuildingInteractive({
     const handleKey = (e: React.KeyboardEvent<SVGGElement>, floor: Floor) => {
         if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
-            onSelect?.(floor);
+            goToFloor(floor.meta?.floorNumber);
         } else if (e.key === "Escape") {
             handleLeave();
         } else {
             if (!tooltip) showTooltipAtCentroid(floor);
         }
+    };
+
+    const goToFloor = (floorNo?: number) => {
+        if (!floorNo) return;
+        router.push(`/${locale}/floorplan/${floorNo}`);
     };
 
     const handlePointerEnter = (_e: React.PointerEvent<SVGGElement>, f: Floor) => {
@@ -183,7 +193,10 @@ export default function BuildingInteractive({
                             onPointerLeave={handlePointerLeave}
                             onPointerMove={(e) => handlePointerMove(e, f)}
                             onPointerDown={(e) => handlePointerDown(e, f)}
-                            onClick={() => onSelect?.(f)}
+                            onClick={() => {
+                                onSelect?.(f);
+                                goToFloor(f.meta?.floorNumber);
+                            }}
                         >
                             {polys.map((p, i) => (
                                 <polygon
