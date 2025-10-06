@@ -3,14 +3,14 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import Leaflet from 'leaflet';
 
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
-import markerIcon from 'leaflet/dist/images/marker-icon.png';
-import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-
 Leaflet.Icon.Default.mergeOptions({
-    iconRetinaUrl: markerIcon2x.src,
-    iconUrl: markerIcon.src,
-    shadowUrl: markerShadow.src,
+    iconRetinaUrl: '/image/map/map-pin.png',
+    iconUrl: '/image/map/map-pin.png',
+    shadowUrl: '/image/map/map-pin-shadow.png',
+    iconSize: [30, 40],
+    shadowSize: [40, 40],
+    iconAnchor: [15, 40],
+    shadowAnchor: [2, 40],
 });
 
 const coords: [number, number] = [48.1486, 17.1077]; // Bratislava
