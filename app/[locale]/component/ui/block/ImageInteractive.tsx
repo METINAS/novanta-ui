@@ -10,11 +10,16 @@ import {useLocale} from "use-intl";
 type FloorShape = { points: string };
 
 export type Floor = {
-    id: string;
+    id: number;
     points?: string;
     shapes?: FloorShape[];
     label: string;
-    meta?: { floorNumber?: number } & Record<string, unknown>;
+    meta?: {
+        floorNumber?: number;
+        flatId?: number;
+        pdfUrl?: string;
+        price?: number;
+    };
 };
 
 type Props = {
@@ -28,7 +33,7 @@ type Props = {
     roomBuckets?: number[];
 };
 
-export default function BuildingInteractive({
+export default function ImageInteractive({
                                                 imageSrc,
                                                 viewBox,
                                                 floors,
@@ -38,10 +43,10 @@ export default function BuildingInteractive({
                                                 availability,
                                                 roomBuckets = [1, 2, 3, 4, 5],
                                             }: Props) {
-    const t = useTranslations("BuildingInteractive");
+    const t = useTranslations("ImageInteractive");
 
     const wrapperRef = useRef<HTMLDivElement>(null);
-    const [hoverId, setHoverId] = useState<string | null>(null);
+    const [hoverId, setHoverId] = useState<number | null>(null);
     const [hoverFloorNo, setHoverFloorNo] = useState<number | null>(null);
     const [tooltip, setTooltip] = useState<{ left: number; top: number } | null>(null);
     const [vb, setVb] = React.useState(`0 0 ${viewBox.width} ${viewBox.height}`);
@@ -165,7 +170,7 @@ export default function BuildingInteractive({
                 style={{transformOrigin: "center top"}}
             >
                 <image
-                    href={imageSrc}
+                    href={(imageSrc).toString()}
                     x="0"
                     y="0"
                     width={viewBox.width}

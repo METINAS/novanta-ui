@@ -151,7 +151,7 @@
       "target5": "06/2027"
     }
   },
-  "BuildingInteractive": {
+  "ImageInteractive": {
     "available_flats": "Voľné byty",
     "floor": "Poschodie",
     "room": "izbové"

@@ -1,15 +1,15 @@
-import Image from "next/image";
 import MContainer from "@/app/[locale]/component/layout/MContainer";
 import { notFound } from "next/navigation";
 import Contact from "@/app/[locale]/component/ui/section/Contact";
 import MError from "@/app/[locale]/component/micro/MError";
+import FloorPlanSection from "@/app/[locale]/component/ui/section/FloorplanSection";
 
 type PageProps = {
     params: Promise<{ locale: string; floor: string }>;
 };
 
 const imageByFloor: Record<number, string> = {
-    1: "/floorplans/floor-1.jpg",
+    1: "/floorplans/floor-1.png",
     2: "/floorplans/floor-2.png",
     3: "/floorplans/floor-3.png",
     4: "/floorplans/floor-4.png",
@@ -54,26 +54,21 @@ export default async function FloorPlanPage(props: PageProps) {
             <MContainer variant="regular" className="mt-[88px] py-8 md:py-16">
                 <h2>{floorNo}. poschodie</h2>
 
-                <div className="w-full max-h-[800px] flex justify-center">
-                    <Image
-                        src={src}
-                        alt={`Pôdorys ${floorNo}. poschodie`}
-                        width={1200}
-                        height={800}
-                        priority
-                    />
-                </div>
-
                 {flats ? (
-                    <ul className="mt-8">
-                        {flats.map((flat: any) => (
-                            <li key={flat.id}>
-                                <strong>{flat.name}</strong> – {flat.size} m²
-                            </li>
-                        ))}
-                    </ul>
+                    <>
+                        <div className="w-full max-h-[800px] flex justify-center">
+                            <FloorPlanSection flats={flats} floor={floorNo} />
+                        </div>
+                        <ul className="mt-8">
+                            {flats.map((flat: any) => (
+                                <li key={flat.id}>
+                                    <strong>{flat.name}</strong> – {flat.size} m²
+                                </li>
+                            ))}
+                        </ul>
+                    </>
                 ) : (
-                    <MError>
+                    <MError className={`my-8`}>
                         Nepodarilo sa načítať údaje o bytoch pre toto poschodie.
                         <br />
                         Skúste to prosím neskôr.

@@ -26,7 +26,7 @@ const ListItem: React.FC<ListItemProps> = async ({
 
     return (
         <div
-            className={`grid grid-cols-10 p-2 font-semibold text-center items-center ${rowBg}`}
+            className={`grid grid-cols-10 p-1 font-semibold text-center items-center ${rowBg}`}
         >
             <p className="text-brand font-bold">{flatNumber}</p>
             <p>{floor}</p>

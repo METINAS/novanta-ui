@@ -1,14 +1,14 @@
 'use client'
 
 import MContainer from "@/app/[locale]/component/layout/MContainer";
-import BuildingInteractive, {Floor} from "@/app/[locale]/component/ui/block/BuildingInteractive";
+import ImageInteractive, {Floor} from "@/app/[locale]/component/ui/block/ImageInteractive";
 import {buildAvailability} from "@/app/[locale]/util/buildAvailability";
 import {flats} from "@/app/[locale]/component/ui/section/FlatList";
 
 const availability = buildAvailability(flats);
 
 const floors: Floor[] = [
-    { id: "f4",
+    { id: 4,
         label: "Floor 4",
         shapes: [
             {
@@ -32,7 +32,7 @@ const floors: Floor[] = [
         meta: { floorNumber: 4 }
     },
     {
-        id: "f3",
+        id: 3,
         label: "Floor 3",
         shapes: [
             {
@@ -74,7 +74,7 @@ const floors: Floor[] = [
         meta: { floorNumber: 3 }
     },
     {
-        id: "f2",
+        id: 2,
         label: "Floor 2",
         shapes: [
             {
@@ -126,7 +126,7 @@ const floors: Floor[] = [
         meta: { floorNumber: 2 }
     },
     {
-        id: "f1",
+        id: 1,
         label: "Floor 1",
         shapes: [
             {
@@ -190,7 +190,7 @@ const Model = () => {
         <>
             <MContainer variant="full" className={`bg-linear-to-b from-[#E6E9EC] to-[#DFE3E8]`}>
                 <MContainer variant="regular">
-                    <BuildingInteractive
+                    <ImageInteractive
                         imageSrc="/image/model/AXO6.png"
                         viewBox={{width: 1600, height: 1600}}
                         floors={floors}
