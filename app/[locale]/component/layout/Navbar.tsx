@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import { isPhone } from "@/app/[locale]/util/isPhone";
 import MContainer from "@/app/[locale]/component/layout/MContainer";
 import LanguageSwitcher from "@/app/[locale]/component/ui/block/LanguageSwitcher";
+import {Link} from "@/i18n/routing";
 
 type NavLink = {
     text: string;
@@ -64,14 +65,16 @@ const Navbar = () => {
                         style={{ height: NAV_HEIGHT }}
                     >
                         <div className="flex gap-2 items-center">
-                            <Image
-                                src="/image/layout/novanta_logo.webp"
-                                alt="Logo Novanta"
-                                height={512}
-                                width={512}
-                                priority
-                                className="h-[32px] lg:h-[48px] w-auto"
-                            />
+                            <Link href={`/`}>
+                                <Image
+                                    src="/image/layout/novanta_logo.webp"
+                                    alt="Logo Novanta"
+                                    height={512}
+                                    width={512}
+                                    priority
+                                    className="h-[32px] lg:h-[48px] w-auto"
+                                />
+                            </Link>
                             <LanguageSwitcher />
                         </div>
 
