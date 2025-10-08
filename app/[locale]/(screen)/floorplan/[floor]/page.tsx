@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Contact from "@/app/[locale]/component/ui/section/Contact";
 import MError from "@/app/[locale]/component/micro/MError";
 import FloorPlanSection from "@/app/[locale]/component/ui/section/FloorplanSection";
+import {Flat} from "@/app/[locale]/component/ui/section/FlatList";
 
 type PageProps = {
     params: Promise<{ locale: string; floor: string }>;
@@ -60,9 +61,9 @@ export default async function FloorPlanPage(props: PageProps) {
                             <FloorPlanSection flats={flats} floor={floorNo} />
                         </div>
                         <ul className="mt-8">
-                            {flats.map((flat: any) => (
+                            {flats.map((flat: Flat) => (
                                 <li key={flat.id}>
-                                    <strong>{flat.name}</strong> – {flat.size} m²
+                                    <strong>{flat.flatNumber}</strong> – {flat.totalMSquared} m²
                                 </li>
                             ))}
                         </ul>

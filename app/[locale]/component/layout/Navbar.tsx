@@ -27,13 +27,13 @@ const navLinks: NavLink[] = [
 
 const Navbar = () => {
     const t = useTranslations("Navbar");
-    const [NAV_HEIGHT, setNavHeight] = useState<number>(104);
+    const [NAV_HEIGHT, setNavHeight] = useState<number>(72);
     const [open, setOpen] = useState(false);
     const [scrolled, setScrolled] = useState<boolean>(false);
     const pathname = usePathname();
 
     useEffect(() => {
-        setNavHeight(isPhone() ? 72 : 104);
+        setNavHeight(isPhone() ? 48 : 72);
     }, []);
 
     useEffect(() => {
